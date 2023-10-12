@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #3BACB6;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turquoise RD</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body style="background-color: #3BACB6;">
+    <div class="header">
+        <form class="container-fluid" action="/" method="get">
+            <button class="border rounded" type="submit">
+                <img src="/images/logo.png" alt="Logo">
+                <span class="site-name">Turquoise RD</span>
+            </button>
+        </form>
+    </div>
+
+    {% if starterPage %}
+        <div class="container mt-5">
+            <div class="text-center">
+                <img src="/images/logo.png" alt="">
+            </div>
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="city-selection" style="background-color: #82dbd8c4;">
+                        <h3 class="text-center">Bölge Seçimi</h3>
+                        <hr>
+                        <form action="/analysis" method="post">
+                            <div class="form-group">
+                                <label for="countrySelect">Ülke Seçin</label>
+                                <select class="form-control" id="countrySelect" name="country">
+                                    <option value="error">Ülke Seçiniz</option>
+                                    {% for data in jsonData %}
+                                        <option value="{{ data['country'] }}">{{ data['country'] }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="citySelect">Şehir Seçin</label>
+                                <select class="form-control" id="citySelect" name="city">
+                                    <!-- Diğer şehirleri buraya ekleyebilirsiniz -->
+                                </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="yearInput">Yıl:</label>
+                                <input type="number" name="year" class="form-control" id="yearInput" placeholder="Yıl giriniz" min="1950" max="2099">
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-success btn-primary">Seç</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if analysisPage %}
+        {% if cityName == "error" %}
+            <script>
+                alert("Please select a country!");
+            </script>
+        {% endif %}
+        <!-- Analysis Page HTML Buraya Eklenebilir -->
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+    
+</body>
+</html>
